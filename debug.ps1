@@ -24,6 +24,8 @@ $DEBUG_KEY="ehjno5eyjyiq.1qoua9kqvbuqu.2qu59nezkk31w.1z1dt8qrtzjih"
 Write-Host "[+] Reverting test machine snapshot"
 "`"$VMWARE_VMRUN`" -T ws revertToSnapshot `"$TEST_MACHINE_PATH`" $TEST_MACHINE_SNAPSHOT" | cmd
 
+Start-Sleep -Seconds 1
+
 $running_machines = "`"$VMWARE_VMRUN`" list" | cmd
 
 if (-not [bool]($running_machines -Match $TEST_MACHINE_PATH)) {
@@ -45,4 +47,4 @@ plink -batch -P 22 -pw $TEST_MACHINE_PASSWORD $TEST_MACHINE_USERNAME`@$TEST_MACH
 plink -batch -P 22 -pw $TEST_MACHINE_PASSWORD $TEST_MACHINE_USERNAME`@$TEST_MACHINE_IP "$START_SERVICE"
 
 Write-Host "[+] Attaching the debugging session"
-"`"$WINDBG`" -k net:port=$DEBUG_PORT,key=$DEBUG_KEY -srcpath `"$SOURCE_DIRECOTY`"" | cmd
+"`"$WINDBG`" -k net:port=$DEBUG_PORT,key=$DEBUG_KEY -c `" .reload /fn $PROJECT_NAME.sys ; `"" | cmd
