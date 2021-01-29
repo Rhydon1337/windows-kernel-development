@@ -34,4 +34,6 @@ Open debug.ps1:
 
 Now, when you run the powershell script (debug.ps1) it will open a debugging session to your driver.
 
+Breakpoint example: bp \`KernelDriverName!Source.cpp:23\`
+
 DONE!!!
