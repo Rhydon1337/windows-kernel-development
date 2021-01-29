@@ -47,6 +47,7 @@ plink -batch -P 22 -pw $TEST_MACHINE_PASSWORD $TEST_MACHINE_USERNAME`@$TEST_MACH
 plink -batch -P 22 -pw $TEST_MACHINE_PASSWORD $TEST_MACHINE_USERNAME`@$TEST_MACHINE_IP "$START_SERVICE"
 
 $WINDBG_SCRIPT="$PSScriptRoot\script.txt"
+"taskkill /IM windbg.exe" | cmd
 
 Write-Host "[+] Attaching the debugging session"
 "echo .srcpath `"$SOURCE_DIRECOTY`" > $WINDBG_SCRIPT" | cmd
